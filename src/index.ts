@@ -6,13 +6,21 @@ import { signup } from "./endpoints/signup";
 import { login } from "./endpoints/login";
 import { getUserProfile } from "./endpoints/getUserProfile";
 
+import dotenv from "dotenv";
+import { followUser } from "./endpoints/followUser";
+import { unfollowUser } from "./endpoints/unfollowUser";
+
 const app = express();
+
+dotenv.config();
 
 app.use(express.json());
 
 app.post("/signup", signup);
 app.post("/login", login);
 app.get("/user/profile", getUserProfile);
+app.post("/user/follow", followUser);
+app.post("/user/unfollow", unfollowUser);
 
 const server = app.listen(process.env.PORT || 3003, () => {
   if (server) {
