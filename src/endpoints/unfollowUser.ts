@@ -17,8 +17,8 @@ export const unfollowUser = async (req: Request, res: Response) => {
 
     const followersDatabase = new FollowersDatabase();
     await followersDatabase.unfollowUser(
-      authenticatorData.id,
-      userToUnfollowId
+      userToUnfollowId,
+      authenticatorData.id
     );
 
     res.status(200).send({

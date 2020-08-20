@@ -1,4 +1,5 @@
 import { BaseDatabase } from "./BaseDatabase";
+import { followUser } from "../endpoints/followUser";
 
 export class FollowersDatabase extends BaseDatabase {
   private static TABLE_NAME: string = "Cookenu_Followers";
@@ -13,9 +14,11 @@ export class FollowersDatabase extends BaseDatabase {
   }
 
   public async unfollowUser(user: string, follower: string): Promise<any> {
-    const result = await this.getConnection().raw(`
-      DELETE FROM ${FollowersDatabase.TABLE_NAME} WHERE user_id = ${user} AND follower_id = ${follower};
-      `);
+    const result = await this.getConnection()
+      .del("*")
+      .from(FollowersDatabase.TABLE_NAME)
+      .where({ user_id: user })
+      .andWhere({ follower_id: follower });
     return result[0];
   }
 }

@@ -16,7 +16,7 @@ export const followUser = async (req: Request, res: Response) => {
     const authenticatorData = authenticator.getData(token);
 
     const followersDatabase = new FollowersDatabase();
-    await followersDatabase.followUser(authenticatorData.id, userToFollowId);
+    await followersDatabase.followUser(userToFollowId, authenticatorData.id);
 
     res.status(200).send({
       message: "Usuário seguido",
