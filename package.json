@@ -36,5 +36,6 @@
     "ts-node-dev": "^1.0.0-pre.58",
     "typescript": "^3.9.7",
     "uuid": "^8.3.0"
-  }
+  },
+  "devDependencies": {}
 }
