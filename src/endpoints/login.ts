@@ -6,7 +6,7 @@ import { BaseDatabase } from "../data/BaseDatabase";
 
 export const login = async (req: Request, res: Response) => {
   try {
-    const email = req.body.email;
+    const email = req.body.email as string;
     const password = req.body.password;
 
     const userDatabase = new UserDatabase();
