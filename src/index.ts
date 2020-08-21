@@ -2,20 +2,19 @@ import dotenv from "dotenv";
 import express from "express";
 
 import { AddressInfo } from "net";
+import { RecipeDatabase } from "./data/RecipeDatabase";
 
 import { signup } from "./endpoints/signup";
 import { login } from "./endpoints/login";
 import { getUserProfile } from "./endpoints/getUserProfile";
 import { getProfileById } from "./endpoints/getProfileById";
+import { followUser } from "./endpoints/followUser";
+import { unfollowUser } from "./endpoints/unfollowUser";
+import { deleteUser } from "./endpoints/deleteUser";
 
-import { RecipeDatabase } from "./data/RecipeDatabase";
 dotenv.config();
 
 const recipeDatabase = new RecipeDatabase();
-
-import dotenv from "dotenv";
-import { followUser } from "./endpoints/followUser";
-import { unfollowUser } from "./endpoints/unfollowUser";
 
 const app = express();
 
@@ -32,6 +31,7 @@ app.get("/user/:id", getProfileById);
 app.post("/user/follow", followUser);
 app.post("/user/unfollow", unfollowUser);
 
+app.delete("/user/:id", deleteUser);
 
 const server = app.listen(process.env.PORT || 3003, () => {
   if (server) {

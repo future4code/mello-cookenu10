@@ -1,4 +1,5 @@
 import { BaseDatabase } from "./BaseDatabase";
+import { RecipeDatabase } from "./RecipeDatabase";
 
 export class UserDatabase extends BaseDatabase {
   private static TABLE_NAME: string = "Cookenu_User";
@@ -35,5 +36,12 @@ export class UserDatabase extends BaseDatabase {
       .from(UserDatabase.TABLE_NAME)
       .where({ id });
     return result[0];
+  }
+
+  public async deleteUser(id: string): Promise<any> {
+    await this.getConnection()
+      .delete("*")
+      .from(UserDatabase.TABLE_NAME)
+      .where({ id });
   }
 }

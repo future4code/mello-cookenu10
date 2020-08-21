@@ -7,15 +7,18 @@ import { BaseDatabase } from "../data/BaseDatabase";
 
 export const signup = async (req: Request, res: Response) => {
   try {
-    const name = req.body.name;
-    const email = req.body.email;
-    const password = req.body.password;
+    const userData = {
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+      role: req.body.role,
+    };
 
-    if (!name || !email || !password) {
+    if (!userData.email || !userData.name || !userData.password) {
       throw new Error("Todos os campos são obrigatórios");
     }
 
-    if (email.indexOf("@") === -1) {
+    if (userData.email.indexOf("@") === -1) {
       throw new Error("E-mail inválido");
     }
 
@@ -23,13 +26,19 @@ export const signup = async (req: Request, res: Response) => {
     const id = idGenerator.generateId();
 
     const hashManager = new HashManager();
-    const hashPassword = await hashManager.hash(password);
+    const hashPassword = await hashManager.hash(userData.password);
 
     const userDatabase = new UserDatabase();
-    await userDatabase.createUser(id, name, email, hashPassword, "NORMAL");
+    await userDatabase.createUser(
+      id,
+      userData.name,
+      userData.email,
+      hashPassword,
+      userData.role
+    );
 
     const authenticator = new Authenticator();
-    const token = authenticator.generateToken({ id });
+    const token = authenticator.generateToken({ id, role: userData.role });
 
     res.status(200).send({
       message: "Usuário criado com sucesso",
