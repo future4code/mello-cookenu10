@@ -25,6 +25,9 @@
  <li> - Dotenv </li>
  <li> - Knex </li>
  <li> - Hash </li>
+ <li> - uuid </li>
+ <li> - json </li>
+ <li> - bcryp </li>
  
  
  <h6>Para copiar o projeto, utilize os comandos:</h6>
