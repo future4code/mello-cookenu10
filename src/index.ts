@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import express from "express";
 
 import { AddressInfo } from "net";
-import { RecipeDatabase } from "./data/RecipeDatabase";
+
 
 import { signup } from "./endpoints/signup";
 import { login } from "./endpoints/login";
@@ -12,9 +12,7 @@ import { followUser } from "./endpoints/followUser";
 import { unfollowUser } from "./endpoints/unfollowUser";
 import { deleteUser } from "./endpoints/deleteUser";
 
-dotenv.config();
 
-const recipeDatabase = new RecipeDatabase();
 
 const app = express();
 
