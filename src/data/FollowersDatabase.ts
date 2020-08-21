@@ -21,4 +21,11 @@ export class FollowersDatabase extends BaseDatabase {
       .andWhere({ follower_id: follower });
     return result[0];
   }
+
+  public async deleteFollowersInfo(id: string): Promise<any> {
+    await this.getConnection()
+      .delete("*")
+      .from(FollowersDatabase.TABLE_NAME)
+      .where({ id });
+  }
 }

@@ -6,15 +6,21 @@ import { BaseDatabase } from "../data/BaseDatabase";
 
 export const login = async (req: Request, res: Response) => {
   try {
-    const email = req.body.email as string;
-    const password = req.body.password;
+    if (!req.body.email || req.body.email.indexOf("@") === -1) {
+      throw new Error("Email inválido");
+    }
+
+    const userData = {
+      email: req.body.email,
+      password: req.body.password,
+    };
 
     const userDatabase = new UserDatabase();
-    const user = await userDatabase.getUserByEmail(email);
+    const user = await userDatabase.getUserByEmail(userData.email);
 
     const hashManager = new HashManager();
     const isPasswordCorrect = await hashManager.compare(
-      password,
+      userData.password,
       user.password
     );
 
@@ -23,7 +29,7 @@ export const login = async (req: Request, res: Response) => {
     }
 
     const authenticator = new Authenticator();
-    const token = authenticator.generateToken({ id: user.id });
+    const token = authenticator.generateToken({ id: user.id, role: user.role });
 
     res.status(200).send({
       message: "Usuário logado",
