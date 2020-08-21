@@ -13,7 +13,7 @@ dotenv.config();
 
 const recipeDatabase = new RecipeDatabase();
 
-import dotenv from "dotenv";
+
 import { followUser } from "./endpoints/followUser";
 import { unfollowUser } from "./endpoints/unfollowUser";
 
