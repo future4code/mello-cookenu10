@@ -27,4 +27,11 @@ export class RecipeDatabase extends BaseDatabase {
       .where({ id });
     return result[0];
   }
+
+  public async deleteRecipe(id: string): Promise<any> {
+    await this.getConnection()
+      .delete("*")
+      .from(RecipeDatabase.TABLE_NAME)
+      .where({ id });
+  }
 }
