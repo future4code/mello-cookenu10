@@ -6,7 +6,7 @@
   Ela possui todas as funcionalidades mais comuns em redes sociais 
   e o seguintes <b>endpoints</b>:</p>
   
-  <li>✔️Signup</li>
+  
  <li>✔️Signup</li>
  <li>✔️Login</li>
  <li>✔️Pegar próprio perfil</li>
